@@ -1,0 +1,24 @@
+
+app ConApp {
+	
+  appicon="AppIcon.png"
+  splash="SplashScreen.png"
+  
+  mainview=DKCWebview( DukeConWebsite() )            
+	 
+}     
+
+contentprovider DukeConWebsite 
+    fetches HTML from "http://dev.dukecon.org/latest/" 
+ 
+       
+   
+webview DKCWebview {
+    title="ConfApp" 
+    button{
+  		icon="icon_back.png"  
+  		handler="previousPage"  
+  	} 
+}
+  
+  

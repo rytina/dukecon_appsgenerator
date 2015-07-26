@@ -1,0 +1,15 @@
+«IMPORT org::applause::lang::applauseDsl»
+
+«EXTENSION templates::Extensions» 
+
+«DEFINE main FOR Object-»
+«ENDDEFINE»
+
+
+«DEFINE main FOR Application-»
+«EXPAND View::main»
+«IF providersWithImplementation().size > 0»
+  «EXPAND Provider::main»
+«ENDIF»
+«EXPAND Application::main»
+«ENDDEFINE»

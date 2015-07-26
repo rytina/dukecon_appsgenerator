@@ -1,0 +1,94 @@
+«IMPORT org::applause::lang::applauseDsl»
+
+«EXTENSION templates::Extensions»
+
+«DEFINE main FOR ApplauseModel»
+«EXPAND main FOR elements.typeSelect(Application).first()»
+«ENDDEFINE»
+
+«DEFINE main FOR Application» 
+«EXPAND mainFile»
+«EXPAND headerFile»
+«EXPAND moduleFile»
+«ENDDEFINE»
+
+«DEFINE headerFile FOR Application»
+«FILE filenameApplicationDelegateHeader()»
+#import <UIKit/UIKit.h>
+
+@interface «applicationDelegateClassname()» : UIResponder <UIApplicationDelegate> 
+
+@property (strong, nonatomic) UIWindow *window;
+
+@end
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE importStatements FOR Application-»
+«EXPAND importStatement FOREACH buttons-»
+«ENDDEFINE»
+
+«DEFINE importStatement FOR Button-»
+#import "Custom«view.view.filenameHeader()»"
+«ENDDEFINE»
+
+«DEFINE moduleFile FOR Application»
+«FILE filenameApplicationDelegateModule()»
+#import "«filenameApplicationDelegateHeader()»"
+#import "«mainview.view.name»ViewController.h"
+
+«EXPAND importStatements-»
+
+@implementation «applicationDelegateClassname()»
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window =  [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIViewController * rootController = [self createController];
+	[_window addSubview: [rootController view]];
+    [_window setRootViewController:rootController];
+    [_window makeKeyAndVisible];
+    return YES;
+}
+
+-(UIViewController*)createController {
+    UIViewController *ctrl = [[«mainview.view.name»ViewController alloc] init];
+	return [[UINavigationController alloc] initWithRootViewController:ctrl];
+}
+
+
+@end
+«ENDFILE»
+«ENDDEFINE»
+
+
+
+«DEFINE mainFile FOR Application»
+«FILE "main.m"»
+
+#import <UIKit/UIKit.h>
+
+#import "«filenameApplicationDelegateHeader()»"
+
+int main(int argc, char * argv[])
+{
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([«applicationDelegateClassname()» class]));
+    }
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+
+
+
+
+
+
+
+
+
+
+

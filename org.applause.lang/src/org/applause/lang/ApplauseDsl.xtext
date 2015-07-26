@@ -1,0 +1,222 @@
+grammar org.applause.lang.ApplauseDsl with org.eclipse.xtext.common.Terminals
+
+generate applauseDsl "http://www.applause.org/lang/ApplauseDsl"
+
+ApplauseModel:
+	application=Application
+	(elements+=ModelElement)*;
+	
+
+ModelElement:
+	Type | ContentProvider | View | Constant;
+	
+// -------------------------------------------
+// General
+
+// common supertype to allow variableReferences
+VariableDeclaration:
+	Parameter | Property | CollectionIterator;
+
+TypeDescription:
+	type=[Type] (many?='[]')?;
+	
+Parameter:
+	description=TypeDescription name=ID;
+
+ObjectReference:
+	object=[VariableDeclaration] tail=NestedObjectReference?;
+	
+//workaround: NestedObjectReference as separate rule to guide the content 
+//   assist parser technically could have been include in ObjectReference like
+//   ObjectReference:
+//     object=[VariableDeclaration] ('.' tail=ObjectReference)?;
+NestedObjectReference returns ObjectReference:
+	'.' object=[VariableDeclaration] tail=NestedObjectReference?;
+	
+Expression:
+	StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
+
+ScalarExpression:
+	StringLiteral | StringFunction | ObjectReference;
+	
+CollectionExpression:
+	CollectionLiteral | CollectionFunction | ObjectReference;
+	
+StringLiteral:
+	value=STRING;
+	
+PredefinedParameter:
+	SectionId;
+	
+SectionId:
+{SectionId}
+	'section.id';	
+
+StringFunction:
+	{StringConcat} '(' (values+=ScalarExpression)+ ')' |
+	{StringReplace} 'replace(' value=ScalarExpression ',' match=ScalarExpression ',' replacement=ScalarExpression ')' |
+	{StringUrlConform} 'urlconform(' value=ScalarExpression ')';
+	
+CollectionLiteral:
+	'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
+	
+CollectionFunction:
+	{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')'
+;
+
+
+	
+// -------------------------------------------
+// applications
+
+Application returns Application:
+	(tabbarApplication?="tabbarApp" | "app") name=ID '{'
+		"appicon=" appicon=ScalarExpression
+		"splash=" splash=ScalarExpression
+		'mainview=' mainview=ViewCall
+		(buttons += Button)*
+	'}';
+
+Button:
+	'button' '{'
+		('title=' title=ScalarExpression)?
+		& ('icon=' icon=ScalarExpression)?
+		& ('view=' view=ViewCall | 'handler=' handler=STRING)
+	'}'
+;
+
+Constant returns VariableDeclaration:
+	{Constant} 'const' name=ID language+=("de="|"en=")? value+=ScalarExpression 
+								(',' language+=("de="|"en=")? value+=ScalarExpression)*;	
+
+// -------------------------------------------
+// types
+Type:
+	SimpleType | Entity;
+	
+SimpleType:
+	'type' name=ID 'mapsTo' platformType = STRING;
+	
+Entity :
+	'entity' name=ID ('extends' extends=[Entity])? '{'
+		(properties+=Property)*
+	'}';
+
+Property:
+	(derived?='derived')? description=TypeDescription name=ID;
+
+// -------------------------------------------
+// content provider
+
+ContentProvider:
+	'contentprovider' name=ID
+	('(' parameter=Parameter ')')? 
+	(('returns'|resolver?='resolves') type=[Type] (many?='[]')?)?
+	'fetches' (xml?='XML' | html?='HTML')
+	'from' url=ScalarExpression
+	('selects' selection=ScalarExpression)?;
+
+ProviderConstruction:
+	{ComplexProviderConstruction} provider=[ContentProvider] '(' (argument=Expression|predefinedParameter=PredefinedParameter)? ')' |
+	{SimpleProviderConstruction} expression=Expression;
+
+// -------------------------------------------
+// views
+
+
+
+View:
+	SectionedView | CustomView | WebView;
+	
+SectionedView: 
+	TableView | DetailsView;
+		
+TableView:
+	'tableview' name=ID ('(' content=Parameter ')')? (':' superView=[SectionedView])? '{'
+		('title=' title=ScalarExpression)?
+		(buttons += Button)*
+		(forAllSections=ViewForAllSections)?
+		(sections+=ViewSection)*
+	'}';
+	
+DetailsView:
+	'detailsview' name=ID ('(' content=Parameter ')')? (':' superView=[SectionedView])? '{'
+		'title=' title=ScalarExpression
+		(buttons += Button)*
+		(header=ViewHeader)?
+		(forAllSections=ViewForAllSections)?
+		(sections+=ViewSection)*
+	'}';
+	
+WebView:
+	'webview' name=ID '{'
+		'title=' title=ScalarExpression
+		(buttons += Button)*
+		(header=ViewHeader)?
+		(forAllSections=ViewForAllSections)?
+		(sections+=ViewSection)*
+	'}';
+		
+	
+CustomView:
+	'customview' name=ID ('(' content=Parameter ')')? 'implementedBy' objclass=STRING
+	'title=' title=ScalarExpression
+	(buttons += Button)*;
+	
+ViewHeader:
+	{ViewHeader}
+	'header' '{'
+		('title=' title=ScalarExpression)?
+		('subtitle=' subtitle=ScalarExpression)?
+		('details=' details=ScalarExpression)?
+		('image=' image=ScalarExpression)?
+	'}';
+	
+ViewSection:
+{ViewSection}
+	'section' '{'
+		('title=' title=ScalarExpression)?
+		(cells+=SectionCell)*
+	'}';
+	
+ViewForAllSections:
+{ViewForAllSections}
+	'forAllSections' '{'
+		('title=' title=ScalarExpression)?
+		('content=' provider=ProviderConstruction)?
+		(cells+=SectionCell)*
+	'}';	
+	
+SectionCell:
+	'cell' type=CellType ('foreach' iterator=CollectionIterator)? '{'
+		('text=' text=ScalarExpression)?
+		('details=' details=ScalarExpression)?
+		('image=' image=ScalarExpression)?
+		('query=' query=ScalarExpression)?
+		('action=' action=ViewAction)?
+		('button=' buttonAction=ViewAction)?
+	'}';	
+	
+enum CellType:
+	default = 'Default' |
+	defaultWithDisclosure = 'DefaultWithDisclosure' |
+	value2 = 'Value2' |
+	double = 'Double' |
+	subtitle = 'Subtitle' |
+	maps = 'Map';
+	
+CollectionIterator:
+	collection=CollectionExpression 'as' name=ID;
+	
+ViewAction:
+	ViewCall | ExternalOpen | ActionDelegate;
+	
+ActionDelegate:
+{ActionDelegate}
+	"delegate";
+	
+ExternalOpen:
+	url=ScalarExpression;
+
+ViewCall:
+	view=[View] '(' (provider=ProviderConstruction)? ')';	

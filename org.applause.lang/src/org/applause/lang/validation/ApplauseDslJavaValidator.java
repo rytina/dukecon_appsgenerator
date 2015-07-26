@@ -1,0 +1,165 @@
+package org.applause.lang.validation;
+
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import org.applause.lang.applauseDsl.ApplauseDslPackage;
+import org.applause.lang.applauseDsl.ApplauseModel;
+import org.applause.lang.applauseDsl.Button;
+import org.applause.lang.applauseDsl.Constant;
+import org.applause.lang.applauseDsl.ContentProvider;
+import org.applause.lang.applauseDsl.Entity;
+import org.applause.lang.applauseDsl.ObjectReference;
+import org.applause.lang.applauseDsl.SimpleProviderConstruction;
+import org.applause.lang.applauseDsl.StringLiteral;
+import org.applause.lang.applauseDsl.TypeDescription;
+import org.applause.lang.applauseDsl.VariableDeclaration;
+import org.applause.lang.applauseDsl.View;
+import org.applause.lang.scoping.TypeUtil;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+ 
+
+public class ApplauseDslJavaValidator extends AbstractApplauseDslJavaValidator {
+
+	public static final String VIEW_NAME_UPPERCASE = "viewname_uppercase";
+
+	@Check
+	void viewNamesShouldStartWithCapital(View view) {
+		if (!Character.isUpperCase(view.getName().charAt(0))) {
+			error("View names should start with an uppercase letter.", ApplauseDslPackage.VIEW__NAME, VIEW_NAME_UPPERCASE);
+		}
+	}
+	
+	private static final Pattern LEGAL_FILENAMES_PATTERN = Pattern.compile("[a-z0-9_.]*");
+	
+	@Check
+	void validIconFilename(Button button) {
+		if (button.getIcon() instanceof StringLiteral) {
+			String filename = ((StringLiteral) button.getIcon()).getValue();
+			Resource res = button.eResource();
+			
+			URI uri = res.getURI().appendSegment("..").appendSegment("..").appendSegment("Images").appendSegment(filename);
+			boolean exists = (res.getResourceSet().getURIConverter().exists(uri, null));
+			if(!exists) {
+				error("Icon file '" + filename + "' does not exist.", ApplauseDslPackage.BUTTON__ICON);
+			}
+			else {
+				if (!LEGAL_FILENAMES_PATTERN.matcher(filename).matches()) {
+					error("Icon file '" + filename + "' is not a valid filename. " +
+							"Make sure icon files only contain lowercase letters, numbers and the underscore.", ApplauseDslPackage.BUTTON__ICON);
+				}
+			}
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	void oneResolverPerType(final ContentProvider provider) {
+		if(!provider.isResolver())
+			return;
+		
+		ApplauseModel model = (ApplauseModel) provider.eContainer();
+		Iterable<ContentProvider> allProviders = Iterables.filter(model.getElements(), ContentProvider.class);
+		
+		Predicate<ContentProvider> otherProviderOfSameType = new Predicate<ContentProvider>() {
+			public boolean apply(ContentProvider cp) {
+				return cp.isResolver() && cp != provider && cp.getType() == provider.getType();
+			}
+		};
+		
+		if(Iterables.any(allProviders, otherProviderOfSameType)) {
+			error("Only one resolver per type allowed", ApplauseDslPackage.CONTENT_PROVIDER__TYPE);
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	void resolverMustNotReturnLists(ContentProvider provider) {
+		if(provider.isResolver() && provider.isMany()) {
+			error("Resolver must not return lists", ApplauseDslPackage.CONTENT_PROVIDER__MANY);
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	void resolverMustReferToExactlyOneSimpleAttribute(ContentProvider provider) {
+		if(!provider.isResolver()) 
+			return;
+		
+		
+		Function<? super ObjectReference, ? extends VariableDeclaration> objRefToDeclaration = new Function<ObjectReference, VariableDeclaration>() {
+			public VariableDeclaration apply(ObjectReference from) {
+				return from.getObject();
+			}
+		};
+		Iterable<VariableDeclaration> allDeclarations = Iterables.transform(TypeUtil.getReferencesIn(provider.getUrl()), objRefToDeclaration); 
+		Iterable<VariableDeclaration> withoutConstants = Iterables.filter(allDeclarations, new Predicate<VariableDeclaration>() {
+			public boolean apply(VariableDeclaration d) {
+				return !(d instanceof Constant);
+			}
+		});
+		
+		Set<VariableDeclaration> declarations = ImmutableSet.copyOf(withoutConstants);
+		if(declarations.size()<=0)
+			error("Resolver must use an attribute", ApplauseDslPackage.CONTENT_PROVIDER__URL);
+		if(declarations.size()>1)
+			error("Resolver must not use more than one attribute", ApplauseDslPackage.CONTENT_PROVIDER__URL);
+	}
+	
+	@Check
+	void resolversInAndOutIdentical(ContentProvider cp) {
+		if(cp.isResolver() && !(
+				cp.getType() == cp.getParameter().getDescription().getType() &&
+				cp.isMany() == cp.getParameter().getDescription().isMany()))
+			error("Resolvers input and output types must match", ApplauseDslPackage.CONTENT_PROVIDER__TYPE);
+	}
+	
+	public static ContentProvider findResolver(SimpleProviderConstruction construction) {
+		TypeDescription typeDescription = TypeUtil.getTypeOf(construction.getExpression());
+		TypeUtil.getTypeOf(construction.getExpression());
+		final Entity e = (Entity) typeDescription.getType();
+		
+		ApplauseModel model = (ApplauseModel) e.eContainer();
+		Iterable<ContentProvider> allProviders = Iterables.filter(model.getElements(), ContentProvider.class);
+		
+		Predicate<ContentProvider> matchingResolvers = new Predicate<ContentProvider>() {
+			public boolean apply(ContentProvider cp) {
+				return cp.isResolver() && cp.getType() == e && !cp.isMany(); 
+			}
+		};
+		
+		try {
+			return Iterables.find(allProviders, matchingResolvers);
+		} catch(NoSuchElementException exception) {
+			return null;
+		}
+	}
+	
+	@Check
+	void resolverExistsForDirectViewcall(SimpleProviderConstruction construction) {
+		TypeDescription typeDescription = TypeUtil.getTypeOf(construction.getExpression());
+		if (typeDescription.getType() instanceof Entity) {
+				if(findResolver(construction) == null)
+					warning("No matching resolver found for " + typeDescription.getType().getName(), ApplauseDslPackage.SIMPLE_PROVIDER_CONSTRUCTION__EXPRESSION);
+		}
+	}
+	
+	@Check
+	void contentProvidersSelectIsLiteral(ContentProvider provider) {
+		if(provider.getSelection() != null && !(provider.getSelection() instanceof StringLiteral)){
+			error("selection must be a string literal", ApplauseDslPackage.CONTENT_PROVIDER__SELECTION);
+		}
+	}
+	
+	
+	
+	
+
+
+}
