@@ -9,7 +9,7 @@ app ConApp {
 }     
 
 contentprovider DukeConWebsite 
-    fetches HTML from "http://dev.dukecon.org/latest/" 
+    fetches HTML from "http://dukecon.org" 
  
        
    
