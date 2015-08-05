@@ -53,4 +53,5 @@
             </manifest>
             <fileset dir="com.socialapp.services/bin"/>
         </jar>
+        </target>
 </project>
