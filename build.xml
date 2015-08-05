@@ -53,35 +53,4 @@
             </manifest>
             <fileset dir="com.socialapp.services/bin"/>
         </jar>
-	<javac debug="true" debuglevel="${debuglevel}" destdir="com.socialapp.services.test/bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="com.socialapp.services.test/src"/>
-            <classpath refid="classpath"/>
-        </javac>
-    </target>
-    <target depends="build" name="test">
-        <mkdir dir="${junit.output.dir}"/>
-	<jacoco:coverage>
-        	<junit fork="true" forkmode="once" haltonfailure="yes" printsummary="withOutAndErr">
-        	    <formatter type="xml"/>
-        	    <test name="com.socialapp.services.test.SocialappServicesTest" todir="${junit.output.dir}"/>
-        	    <classpath>
-			 <path refid="classpath"/>
-      			 <pathelement location="com.socialapp.services.test/bin"/>
-		    </classpath>
- 	       </junit>
-	</jacoco:coverage>
-	<jacoco:report>                
-    		<executiondata>
-        		<file file="jacoco.exec"/>
-    		</executiondata> 
-    		<structure name="socialapp services test coverage">
-        		<classfiles>
-				<path id="socialapp-services.jar">
-        				<pathelement location="bin/socialapp-services.jar"/>
-    				</path>
-        		</classfiles>
-    		</structure>         
-    		<html destdir="report"/>        
-	</jacoco:report>
-    </target>
 </project>
