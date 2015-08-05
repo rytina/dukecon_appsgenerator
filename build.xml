@@ -33,20 +33,12 @@
 <pathelement location="DukeConAppsGenerator/libs/org.eclipse.xtext.xtend_1.0.2.v201102150722.jar"/>
 <pathelement location="DukeConAppsGenerator/libs/org.eclipse.xtext_1.0.2.v201102150722.jar"/>
     </path>
-    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-        <classpath path="ci-libs/jacocoant.jar"/>
-    </taskdef>
     <target depends="clean" name="init">
 	<mkdir dir="com.socialapp.services/bin"/>
-	<mkdir dir="com.socialapp.services.test/bin"/>
         <mkdir dir="bin"/>
     </target>
     <target name="clean">
 	<delete dir="com.socialapp.services/bin"/>
-	<delete dir="com.socialapp.services.test/bin"/>
-        <delete dir="bin"/>
-	<delete dir="report"/>
-	<delete dir="junit"/>
     </target>
     <target depends="init" name="build">
         <echo message="${ant.project.name}: ${ant.file}"/>
