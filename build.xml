@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="test" name="com.socialapp.services.test" xmlns:jacoco="antlib:org.jacoco.ant">
+<project basedir="." default="build" name="DukeConAppsGenerator">
     <property environment="env"/>
     <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -34,11 +34,10 @@
 <pathelement location="DukeConAppsGenerator/libs/org.eclipse.xtext_1.0.2.v201102150722.jar"/>
     </path>
     <target depends="clean" name="init">
-	<mkdir dir="com.socialapp.services/bin"/>
         <mkdir dir="bin"/>
     </target>
     <target name="clean">
-	<delete dir="com.socialapp.services/bin"/>
+	<delete dir="bin"/>
     </target>
     <target depends="init" name="build">
         <echo message="${ant.project.name}: ${ant.file}"/>
@@ -46,12 +45,12 @@
             <src path="com.socialapp.services/src"/>
             <classpath refid="classpath"/>
         </javac>
-	<jar destfile="bin/socialapp-services.jar">
+	<jar destfile="bin/DukeConAppsGenerator.jar">
             <manifest>
                 <attribute name="Main-Class" value="com.socialapp.services.Main"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="com.socialapp.services/bin"/>
+            <fileset dir="bin"/>
         </jar>
         </target>
 </project>
