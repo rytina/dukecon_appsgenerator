@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="build" name="DukeConAppsGenerator">
+<project basedir="." default="test" name="DukeConAppsGenerator">
     <property environment="env"/>
     <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -39,15 +39,15 @@
     <target name="clean">
 	<delete dir="bin"/>
     </target>
-    <target depends="init" name="build">
+    <target depends="init" name="test">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="com.socialapp.services/bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="com.socialapp.services/src"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="DukeConAppsGenerator/src"/>
             <classpath refid="classpath"/>
         </javac>
 	<jar destfile="bin/DukeConAppsGenerator.jar">
             <manifest>
-                <attribute name="Main-Class" value="com.socialapp.services.Main"/>
+                <attribute name="Main-Class" value="workflow.DukeConAppsGenerator"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="bin"/>
