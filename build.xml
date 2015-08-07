@@ -37,6 +37,9 @@
 </dirset>
 <pathelement location="org.apache.commons.lang/org/apache/commons/lang"/>
  </path>
+<manifestclasspath property="manifest.class.path">
+  <classpath refid="classpath"/>
+</manifestclasspath>
     <target depends="clean" name="init">
         <mkdir dir="bin"/>
     </target>
@@ -55,7 +58,7 @@
 	<jar destfile="bin/DukeConAppsGenerator.jar">
             <manifest>
                 <attribute name="Main-Class" value="workflow.DukeConAppsGenerator"/>
-                <attribute name="Class-Path" value="."/>
+                <attribute name="Class-Path" value="${manifest.classpath}"/>
             </manifest>
             <fileset dir="bin"/>
         </jar>
