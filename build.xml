@@ -48,6 +48,7 @@
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
    <src path="org.applause.lang/src-gen"/>
    <src path="org.applause.lang/src"/>
+   <src path="org.applause.lang.generator.iphone/src"/>
             <src path="DukeConAppsGenerator/src"/>
             <classpath refid="classpath"/>
         </javac>
