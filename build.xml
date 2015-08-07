@@ -60,7 +60,7 @@
             <fileset dir="bin"/>
         </jar>
 <java jar="bin/DukeConAppsGenerator.jar"
-           fork="true"
+           fork="false"
            failonerror="true"
            maxmemory="128m"
            >
