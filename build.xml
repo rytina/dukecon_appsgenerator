@@ -32,7 +32,9 @@
 <pathelement location="DukeConAppsGenerator/libs/org.eclipse.xtext.util_1.0.2.v201102150722.jar"/>
 <pathelement location="DukeConAppsGenerator/libs/org.eclipse.xtext.xtend_1.0.2.v201102150722.jar"/>
 <pathelement location="DukeConAppsGenerator/libs/org.eclipse.xtext_1.0.2.v201102150722.jar"/>
-<pathelement location="org.apache.commons.io/org/apache/commons/io/"/>
+<dirset dir="${build.dir}">
+        <include name="org.apache.commons.io/org/apache/commons/io/**"/>
+</dirset>
 <pathelement location="org.apache.commons.lang/org/apache/commons/lang"/>
  </path>
     <target depends="clean" name="init">
