@@ -37,7 +37,7 @@
 </dirset>
 <pathelement location="org.apache.commons.lang/org/apache/commons/lang"/>
  </path>
-<manifestclasspath property="manifest.class.path">
+<manifestclasspath property="manifest.classpath" jarfile="bin/DukeConAppsGenerator.jar">
   <classpath refid="classpath"/>
 </manifestclasspath>
     <target depends="clean" name="init">
