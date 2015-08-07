@@ -59,5 +59,15 @@
             </manifest>
             <fileset dir="bin"/>
         </jar>
+<java jar="bin/DukeConAppsGenerator.jar"
+           fork="true"
+           failonerror="true"
+           maxmemory="128m"
+           >
+         <arg value="-h"/>
+       
+           <classpath refid="classpath"/>
+       
+       </java>
         </target>
 </project>
