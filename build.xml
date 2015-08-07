@@ -33,7 +33,7 @@
 <pathelement location="DukeConAppsGenerator/libs/org.eclipse.xtext.xtend_1.0.2.v201102150722.jar"/>
 <pathelement location="DukeConAppsGenerator/libs/org.eclipse.xtext_1.0.2.v201102150722.jar"/>
 <dirset dir="org.apache.commons.io">
-        <include name="org/apache/commons/io/**"/>
+        <include name="**"/>
 </dirset>
 <pathelement location="org.apache.commons.lang/org/apache/commons/lang"/>
  </path>
