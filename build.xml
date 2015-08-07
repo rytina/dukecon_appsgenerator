@@ -68,6 +68,7 @@
             </manifest>
             <fileset dir="bin"/>
         </jar>
+<!--
 <java jar="bin/DukeConAppsGenerator.jar"
            fork="true"
            failonerror="true"
@@ -78,7 +79,8 @@
            <classpath>
              <path refid="classpath"/>
            </classpath>
-       
+
        </java>
+-->
         </target>
 </project>
