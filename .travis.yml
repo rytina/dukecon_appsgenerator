@@ -1,1 +1,4 @@
 language: java
+
+after_success:
+    "curl -T bin/DukeConAppsGenerator.jar -u $FTP_USER:$FTP_PASS ftp.hosting-agency.de/public_html/dukecon-apps/"
