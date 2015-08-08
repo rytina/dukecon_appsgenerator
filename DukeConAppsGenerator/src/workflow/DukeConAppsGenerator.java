@@ -75,6 +75,8 @@ public class DukeConAppsGenerator {
 java.net.URL prjPath = templates.Extensions.class.getResource("/" + TEMPLATE_PROJECT_FOLDER_NAME);
 System.out.println(prjPath);
 
+File iosOutput = new File(generatedAppsFolder, "iOS");
+
 java.net.JarURLConnection connection = (java.net.JarURLConnection) prjPath.openConnection();
 java.util.jar.JarFile file = connection.getJarFile();
 java.util.Enumeration<java.util.jar.JarEntry> entries = file.entries();
@@ -82,6 +84,15 @@ while (entries.hasMoreElements()) {
     java.util.jar.JarEntry e = entries.nextElement();
 if (e.getName ().startsWith (TEMPLATE_PROJECT_FOLDER_NAME)){
     System.out.println ( e.getName());
+    String outputName = e.getName().replace (TEMPLATE_PROJECT_FOLDER_NAME, "");
+    File outputFile = new File (iosOutput
+, outputName);
+    if(e.isDirectory()){
+      outputFile.mkdir ();
+      continue; 
+    }
+    templates.Extensions.class.getResource("/" + TEMPLATE_PROJECT_FOLDER_NAME);
+    FileUtils.copyURLToFile(url, outputFile);
 }
 }
 
