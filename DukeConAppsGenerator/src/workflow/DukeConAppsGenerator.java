@@ -83,8 +83,9 @@ while (entries.hasMoreElements()) {
     System.out.println ( e.getName());
 }
 
-		File iOStemplateProject = new File(prjPath);
+/**		File iOStemplateProject = new File(prjPath);
 		FileUtils.copyDirectoryToDirectory(iOStemplateProject, new File(generatedAppsFolder, "iOS"));
+**/
 	}
 
 	private static Outlet createOutlet(final File directory) throws IOException {
