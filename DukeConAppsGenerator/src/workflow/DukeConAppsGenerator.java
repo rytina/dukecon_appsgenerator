@@ -75,11 +75,11 @@ public class DukeConAppsGenerator {
 java.net.URI prjPath = templates.Extensions.class.getResource("/" + TEMPLATE_PROJECT_FOLDER_NAME).toURI();
 System.out.println(prjPath);
 
-JarURLConnection connection = (JarURLConnection) prjPath.openConnection();
-JarFile file = connection.getJarFile();
-Enumeration<JarEntry> entries = file.entries();
+java.net.JarURLConnection connection = (java.net.JarURLConnection) prjPath.openConnection();
+java.util.jar.JarFile file = connection.getJarFile();
+Enumeration<java.util.jar.JarEntry> entries = file.entries();
 while (entries.hasMoreElements()) {
-    JarEntry e = entries.nextElement();
+    java.util.jar.JarEntry e = entries.nextElement();
     System.out.println ( e.getName());
 }
 
