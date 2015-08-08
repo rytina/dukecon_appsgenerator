@@ -77,7 +77,7 @@ System.out.println(prjPath);
 
 java.net.JarURLConnection connection = (java.net.JarURLConnection) prjPath.openConnection();
 java.util.jar.JarFile file = connection.getJarFile();
-Enumeration<java.util.jar.JarEntry> entries = file.entries();
+java.util.Enumeration<java.util.jar.JarEntry> entries = file.entries();
 while (entries.hasMoreElements()) {
     java.util.jar.JarEntry e = entries.nextElement();
     System.out.println ( e.getName());
