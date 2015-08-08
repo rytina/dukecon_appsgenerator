@@ -72,7 +72,7 @@ public class DukeConAppsGenerator {
 	}
 
 	private static void copyTemplateProjectsTo(File generatedAppsFolder) throws URISyntaxException, IOException {
-java.net.URI prjPath = templates.Extensions.class.getResource("/" + TEMPLATE_PROJECT_FOLDER_NAME).toURI();
+java.net.URL prjPath = templates.Extensions.class.getResource("/" + TEMPLATE_PROJECT_FOLDER_NAME);
 System.out.println(prjPath);
 
 java.net.JarURLConnection connection = (java.net.JarURLConnection) prjPath.openConnection();
