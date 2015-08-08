@@ -80,7 +80,9 @@ java.util.jar.JarFile file = connection.getJarFile();
 java.util.Enumeration<java.util.jar.JarEntry> entries = file.entries();
 while (entries.hasMoreElements()) {
     java.util.jar.JarEntry e = entries.nextElement();
+if (e.getName ().startsWith (e.getName ())){
     System.out.println ( e.getName());
+}
 }
 
 /**		File iOStemplateProject = new File(prjPath);
