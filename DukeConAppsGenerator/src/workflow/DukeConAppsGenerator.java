@@ -72,7 +72,8 @@ public class DukeConAppsGenerator {
 	}
 
 	private static void copyTemplateProjectsTo(File generatedAppsFolder) throws URISyntaxException, IOException {
-java.net.URI prjPath = templates.Extensions.class.getResource("../"+TEMPLATE_PROJECT_FOLDER_NAME).toURI();
+java.net.URI prjPath = templates.Extensions.class.getResource(".").toURI();
+System.out.println(prjPath);
 		File iOStemplateProject = new File(prjPath);
 		FileUtils.copyDirectoryToDirectory(iOStemplateProject, new File(generatedAppsFolder, "iOS"));
 	}
