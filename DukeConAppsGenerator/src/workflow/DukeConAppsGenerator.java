@@ -91,7 +91,7 @@ if (e.getName ().startsWith (TEMPLATE_PROJECT_FOLDER_NAME)){
       outputFile.mkdir ();
       continue; 
     }
-    templates.Extensions.class.getResource("/" + TEMPLATE_PROJECT_FOLDER_NAME);
+    java.net.URL url = templates.Extensions.class.getResource("/" + e.getName());
     FileUtils.copyURLToFile(url, outputFile);
 }
 }
