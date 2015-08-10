@@ -57,10 +57,15 @@ public class DukeConAppsGenerator {
 	}
 
 	private static void copyResourceTo(File appsFolder) throws IOException, URISyntaxException {
-		java.net.URL imgUrl = DukeConAppsGenerator.class.getResource(
-		"/Images/iOS");
+		
 		File imagesDestDir = new File(appsFolder, "iOS/ConApp/ConApp/Images");
-		FileUtils.copyDirectory(imagesIOS, imagesDestDir);
+
+java.net.URL url = DukeConAppsGenerator.class.getResource(
+		"/");
+java.net.JarURLConnection connection = (java.net.JarURLConnection) url.openConnection();
+java.util.jar.JarFile jar = connection.getJarFile();
+
+copyJarPathToDirectory(jar, "/Images/iOS", imagesDestDir);
 		File[] iOSImages = imagesDestDir.listFiles();
 		for (File file : iOSImages) {
 			file.renameTo(new File(imagesDestDir, file.getName().replace(".png", "@2x.png")));
@@ -72,21 +77,31 @@ public class DukeConAppsGenerator {
 	}
 
 	private static void copyTemplateProjectsTo(File generatedAppsFolder) throws URISyntaxException, IOException {
-java.net.URL prjPath = templates.Extensions.class.getResource("/" + TEMPLATE_PROJECT_FOLDER_NAME);
-System.out.println(prjPath);
+java.net.URL url = DukeConAppsGenerator.class.getResource(
+		"/");
 
 File iosOutput = new File(generatedAppsFolder, "iOS");
 
-java.net.JarURLConnection connection = (java.net.JarURLConnection) prjPath.openConnection();
+java.net.JarURLConnection connection = (java.net.JarURLConnection) url.openConnection();
 java.util.jar.JarFile file = connection.getJarFile();
-java.util.Enumeration<java.util.jar.JarEntry> entries = file.entries();
+
+copyJarPathToDirectory(file,"/"+ TEMPLATE_PROJECT_FOLDER_NAME, iosOutput);
+
+
+/**		File iOStemplateProject = new File(prjPath);
+		FileUtils.copyDirectoryToDirectory(iOStemplateProject, new File(generatedAppsFolder, "iOS"));
+**/
+	}
+
+  private static void copyJarPathToDirectory (java.util.jar.JarFile jar, String pathInJar, File destinationDir){
+
+java.util.Enumeration<java.util.jar.JarEntry> entries = jar.entries();
 while (entries.hasMoreElements()) {
     java.util.jar.JarEntry e = entries.nextElement();
-if (e.getName ().startsWith (TEMPLATE_PROJECT_FOLDER_NAME)){
+if (e.getName ().startsWith (pathInJar)){
     System.out.println ( e.getName());
-    String outputName = e.getName().replace (TEMPLATE_PROJECT_FOLDER_NAME, "");
-    File outputFile = new File (iosOutput
-, outputName);
+    String outputName = e.getName().replace (pathInJar, "");
+    File outputFile = new File (destinationDir, outputName);
     if(e.isDirectory()){
       outputFile.mkdir ();
       continue; 
@@ -95,11 +110,7 @@ if (e.getName ().startsWith (TEMPLATE_PROJECT_FOLDER_NAME)){
     FileUtils.copyURLToFile(url, outputFile);
 }
 }
-
-/**		File iOStemplateProject = new File(prjPath);
-		FileUtils.copyDirectoryToDirectory(iOStemplateProject, new File(generatedAppsFolder, "iOS"));
-**/
-	}
+  }
 
 	private static Outlet createOutlet(final File directory) throws IOException {
 	
