@@ -61,7 +61,7 @@ public class DukeConAppsGenerator {
 		File imagesDestDir = new File(appsFolder, "iOS/ConApp/ConApp/Images");
 
 java.net.URL url = DukeConAppsGenerator.class.getResource(
-		"/");
+		"/Images");
 java.net.JarURLConnection connection = (java.net.JarURLConnection) url.openConnection();
 java.util.jar.JarFile jar = connection.getJarFile();
 
@@ -78,7 +78,7 @@ copyJarPathToDirectory(jar, "/Images/iOS", imagesDestDir);
 
 	private static void copyTemplateProjectsTo(File generatedAppsFolder) throws URISyntaxException, IOException {
 java.net.URL url = DukeConAppsGenerator.class.getResource(
-		"/");
+		"/Images");
 
 File iosOutput = new File(generatedAppsFolder, "iOS");
 
