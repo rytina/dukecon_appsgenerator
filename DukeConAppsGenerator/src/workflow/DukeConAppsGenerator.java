@@ -93,7 +93,7 @@ copyJarPathToDirectory(file,"/"+ TEMPLATE_PROJECT_FOLDER_NAME, iosOutput);
 **/
 	}
 
-  private static void copyJarPathToDirectory (java.util.jar.JarFile jar, String pathInJar, File destinationDir){
+  private static void copyJarPathToDirectory (java.util.jar.JarFile jar, String pathInJar, File destinationDir) throws IOException{
 
 java.util.Enumeration<java.util.jar.JarEntry> entries = jar.entries();
 while (entries.hasMoreElements()) {
