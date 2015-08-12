@@ -98,8 +98,9 @@ copyJarPathToDirectory(file,"/"+ TEMPLATE_PROJECT_FOLDER_NAME, iosOutput);
 java.util.Enumeration<java.util.jar.JarEntry> entries = jar.entries();
 while (entries.hasMoreElements()) {
     java.util.jar.JarEntry e = entries.nextElement();
+System.out.println ( e.getName());
 if (e.getName ().startsWith (pathInJar)){
-    System.out.println ( e.getName());
+    
     String outputName = e.getName().replace (pathInJar, "");
     File outputFile = new File (destinationDir, outputName);
     if(e.isDirectory()){
