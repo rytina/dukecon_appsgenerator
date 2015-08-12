@@ -65,7 +65,7 @@ java.net.URL url = DukeConAppsGenerator.class.getResource(
 java.net.JarURLConnection connection = (java.net.JarURLConnection) url.openConnection();
 java.util.jar.JarFile jar = connection.getJarFile();
 
-copyJarPathToDirectory(jar, "/Images/iOS", imagesDestDir);
+copyJarPathToDirectory(jar, "Images/iOS", imagesDestDir);
 		File[] iOSImages = imagesDestDir.listFiles();
 		for (File file : iOSImages) {
 			file.renameTo(new File(imagesDestDir, file.getName().replace(".png", "@2x.png")));
@@ -85,7 +85,7 @@ File iosOutput = new File(generatedAppsFolder, "iOS");
 java.net.JarURLConnection connection = (java.net.JarURLConnection) url.openConnection();
 java.util.jar.JarFile file = connection.getJarFile();
 
-copyJarPathToDirectory(file,"/"+ TEMPLATE_PROJECT_FOLDER_NAME, iosOutput);
+copyJarPathToDirectory(file, TEMPLATE_PROJECT_FOLDER_NAME, iosOutput);
 
 
 /**		File iOStemplateProject = new File(prjPath);
@@ -98,9 +98,9 @@ copyJarPathToDirectory(file,"/"+ TEMPLATE_PROJECT_FOLDER_NAME, iosOutput);
 java.util.Enumeration<java.util.jar.JarEntry> entries = jar.entries();
 while (entries.hasMoreElements()) {
     java.util.jar.JarEntry e = entries.nextElement();
-System.out.println ( e.getName());
+
 if (e.getName ().startsWith (pathInJar)){
-    
+    System.out.println ( e.getName());
     String outputName = e.getName().replace (pathInJar, "");
     File outputFile = new File (destinationDir, outputName);
     if(e.isDirectory()){
