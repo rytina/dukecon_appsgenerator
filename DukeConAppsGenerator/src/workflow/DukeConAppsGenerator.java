@@ -71,9 +71,9 @@ copyJarPathToDirectory(jar, "Images/iOS", imagesDestDir);
 			file.renameTo(new File(imagesDestDir, file.getName().replace(".png", "@2x.png")));
 		}
 		
-		File imagesAndroid = new File(DukeConAppsGenerator.class.getResource(
-		"../Images/Android").toURI());
-		FileUtils.copyDirectory(imagesAndroid, new File(appsFolder, "Android/ConApp/res/drawable-hdpi"));
+ imagesDestDir = new File(appsFolder, "Android/ConApp/res/drawable-hdpi");
+
+copyJarPathToDirectory(jar, "Images/Android", imagesDestDir);
 	}
 
 	private static void copyTemplateProjectsTo(File generatedAppsFolder) throws URISyntaxException, IOException {
