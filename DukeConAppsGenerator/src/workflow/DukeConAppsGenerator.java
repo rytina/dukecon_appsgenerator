@@ -86,10 +86,6 @@ java.util.jar.JarFile file = connection.getJarFile();
 
 copyJarPathToDirectory(file, TEMPLATE_PROJECT_FOLDER_NAME, iosOutput);
 
-
-/**		File iOStemplateProject = new File(prjPath);
-		FileUtils.copyDirectoryToDirectory(iOStemplateProject, new File(generatedAppsFolder, "iOS"));
-**/
 	}
 
   private static void copyJarPathToDirectory (java.util.jar.JarFile jar, String pathInJar, File destinationDir) throws IOException{
