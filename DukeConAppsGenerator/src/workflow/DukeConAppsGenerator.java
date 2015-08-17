@@ -42,8 +42,6 @@ public class DukeConAppsGenerator {
 		copyTemplateProjectsTo(appsFolder);
 		copyResourceTo(appsFolder);
 		XtextResourceSet resourceSet = new XtextResourceSet();
-		File file = new File(DukeConAppsGenerator.class.getResource(
-				"../model/ConApp.applause").toURI());
 		Resource resource = resourceSet.getResource(
 				URI.createURI("archive:file:./bin/DukeConAppsGenerator.jar!/model/ConApp.applause"), true);
 		ApplauseModel model = (ApplauseModel) resource.getContents().get(0);
