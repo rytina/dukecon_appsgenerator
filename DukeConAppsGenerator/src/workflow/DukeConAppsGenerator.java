@@ -45,7 +45,7 @@ public class DukeConAppsGenerator {
 		File file = new File(DukeConAppsGenerator.class.getResource(
 				"../model/ConApp.applause").toURI());
 		Resource resource = resourceSet.getResource(
-				URI.createFileURI(file.getAbsolutePath()), true);
+				URI.createURI("archive:file:./bin/DukeConAppsGenerator.jar!/model/ConApp.applause"), true);
 		ApplauseModel model = (ApplauseModel) resource.getContents().get(0);
 
 		OutputImpl output = new OutputImpl();
