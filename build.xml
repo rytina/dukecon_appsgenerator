@@ -58,6 +58,18 @@
   </fileset>
 </copy>
 
+<copy todir="bin">
+  <fileset dir="org.applause.lang/src">
+    <exclude name="**/*.java"/>
+  </fileset>
+</copy>
+
+<copy todir="bin">
+  <fileset dir="org.applause.lang/src-gen">
+    <exclude name="**/*.java"/>
+  </fileset>
+</copy>
+
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
    <src path="org.applause.lang/src-gen"/>
    <src path="org.applause.lang/src"/>
