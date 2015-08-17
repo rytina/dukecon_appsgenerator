@@ -44,7 +44,7 @@ public class DukeConAppsGenerator {
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		
 		Resource resource = resourceSet.getResource(
-				URI.createURI("archive:file:/bin/DukeConAppsGenerator.jar!/model/ConApp.applause"), true);
+				URI.createURI("archive:file:bin/DukeConAppsGenerator.jar!/model/ConApp.applause"), true);
 		ApplauseModel model = (ApplauseModel) resource.getContents().get(0);
 
 		OutputImpl output = new OutputImpl();
