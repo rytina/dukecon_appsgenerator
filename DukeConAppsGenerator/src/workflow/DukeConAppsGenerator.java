@@ -42,6 +42,8 @@ public class DukeConAppsGenerator {
 		copyTemplateProjectsTo(appsFolder);
 		copyResourceTo(appsFolder);
 		XtextResourceSet resourceSet = new XtextResourceSet();
+		
+		/**
 		Resource resource = resourceSet.getResource(
 				URI.createURI("archive:file:./bin/DukeConAppsGenerator.jar!/model/ConApp.applause"), true);
 		ApplauseModel model = (ApplauseModel) resource.getContents().get(0);
@@ -51,7 +53,7 @@ public class DukeConAppsGenerator {
 		output.addOutlet(outlet);
 
 		generate(model.getApplication(), output);
-
+		**/
 	}
 
 	private static void copyResourceTo(File appsFolder) throws IOException, URISyntaxException {
