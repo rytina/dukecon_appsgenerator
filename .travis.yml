@@ -1,8 +1,8 @@
 language: objective-c
 
 before_install: 
-  - sudo apt-get install -qq openjdk-7-jre-headless
-  - sudo apt-get install -qq ant
+  - brew install jdk
+  - brew install ant
 
 before_script: ant test
  
