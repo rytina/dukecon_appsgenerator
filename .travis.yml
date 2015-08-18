@@ -2,7 +2,7 @@ language: objective-c
 
 before_install: 
   - brew update
-  - brew install jdk
+  - brew cask install java
   - brew install ant
 
 before_script: ant test
