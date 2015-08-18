@@ -1,7 +1,6 @@
 language: objective-c
 
-before_script:
- ant test
+before_script: ant test
  
 script: xcodebuild -project ../generated-apps/iOS/ConApp.xcodeproj -sdk iphonesimulator7.1 ONLY_ACTIVE_ARCH=NO 
 
