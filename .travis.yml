@@ -1,8 +1,9 @@
 language: objective-c
 
 before_install: 
+  - brew tap caskroom/cask
+  - brew install brew-cask
   - brew update
-  - brew install cask
   - brew cask install java
   - brew install ant
 
