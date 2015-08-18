@@ -2,6 +2,7 @@ language: objective-c
 
 before_install: 
   - brew update
+  - brew install cask
   - brew cask install java
   - brew install ant
 
