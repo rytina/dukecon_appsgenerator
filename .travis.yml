@@ -1,5 +1,9 @@
 language: objective-c
 
+before_install: 
+ - sudo apt-get install -qq openjdk-7-jre-headless
+ - sudo apt-get install -qq ant
+
 before_script: ant test
  
 script: xcodebuild -project ../generated-apps/iOS/ConApp.xcodeproj -sdk iphonesimulator7.1 ONLY_ACTIVE_ARCH=NO 
