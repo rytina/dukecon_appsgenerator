@@ -10,7 +10,7 @@ before_install:
 
 before_script: ant test 
  
-script:  cat /Users/travis/build/rytina/dukecon_appsgenerator/generated-apps/iOS/ConApp/Generated/main.m && cd generated-apps/iOS && xcodebuild -project ConApp.xcodeproj -sdk iphonesimulator7.1 ONLY_ACTIVE_ARCH=NO 
+script: cd generated-apps/iOS && xcodebuild -project ConApp.xcodeproj -sdk iphonesimulator7.1 ONLY_ACTIVE_ARCH=NO 
 
 after_success:
    "zip -r generated-apps.zip generated-apps && curl -T generated-apps.zip -u $FTP_USER:$FTP_PASS ftp.hosting-agency.de/public_html/dukecon-apps/"
