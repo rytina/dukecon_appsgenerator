@@ -57,7 +57,7 @@ public class DukeConAppsGenerator {
 
 	private static void copyResourceTo(File appsFolder) throws IOException, URISyntaxException {
 		
-		File imagesDestDir = new File(appsFolder, "iOS/ConApp/ConApp/Images");
+		File imagesDestDir = new File(appsFolder, "iOS/ConApp/Images");
 
 java.net.URL url = DukeConAppsGenerator.class.getResource(
 		"/Images");
