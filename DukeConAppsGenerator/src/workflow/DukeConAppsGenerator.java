@@ -24,7 +24,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 
 public class DukeConAppsGenerator {
 
-	private static final String GENERATED_APPS_FOLDER = "../generated-apps";
+	private static final String GENERATED_APPS_FOLDER = "generated-apps";
 	private static final String TEMPLATE_PROJECT_FOLDER_NAME = "templateproject/ConApp";
 
 	static {
