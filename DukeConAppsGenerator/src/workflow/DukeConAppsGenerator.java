@@ -116,7 +116,7 @@ if (e.getName ().startsWith (pathInJar)){
 					throws VetoException {
 				File outputDirectory = null;
 				if(isForiOS(qualifiedName)){
-					outputDirectory = new File(directory, "iOS/ConApp/ConApp/Generated");
+					outputDirectory = new File(directory, "iOS/ConApp/Generated");
 				}else if(isForAndroid(qualifiedName)){
 					outputDirectory = new File(directory, "Android/ConApp/Generated");
 				}
