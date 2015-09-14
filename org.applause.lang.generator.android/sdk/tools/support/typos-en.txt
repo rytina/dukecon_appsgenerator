@@ -2671,7 +2671,7 @@ marrage->marriage
 marraige->marriage
 marrtyred->martyred
 marryied->married
-Massachussets->Massachusetts
+Massachusetts->Massachusetts
 Massachussetts->Massachusetts
 massmedia->mass media
 masterbation->masturbation

@@ -519,7 +519,7 @@ maggiorparte->maggior parte
 magolia->magnolia
 managment->management
 marketting->marketing
-Massachussets->Massachusetts
+Massachusetts->Massachusetts
 Massachussetts->Massachusetts
 medacine->medicine
 mercentile->mercantile
