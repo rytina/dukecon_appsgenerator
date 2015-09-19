@@ -3,6 +3,7 @@
 
     <string name="app_name">DukeConApp</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_deutsch">Deutsche Talks</string>
+    <string name="action_english">Englische Talks</string>
 
 </resources>
