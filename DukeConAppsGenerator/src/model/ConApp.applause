@@ -5,7 +5,7 @@ app ConApp {
   splash = SplashScreen.png
   title = ConfApp
   
-  mainview=DKCWebview( DukeConWebsite() )
+  mainview = DKCWebview( DukeConWebsite() )
   
   navigationBar.left = {
   	icon = navbar_icon_left.png  
@@ -14,8 +14,8 @@ app ConApp {
   
   navigationBar.right = {
   	icon = navbar_icon_right.png  
-  	action = webview.show_english_talks
-  	action = webview.show_german_talks
+  	action = webview.show_english_talks,
+  	         webview.show_german_talks
   }
 	 
 }     
@@ -27,8 +27,8 @@ contentprovider DukeConWebsite
 webview DKCWebview {
     backButton.handler = previousPage
     
-    action show_english_talks;
-    action show_german_talks;
+    action show_english_talks, 
+           show_german_talks
     
 }
   
