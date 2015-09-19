@@ -14,8 +14,8 @@ app ConApp {
   
   navigationBar.right = {
   	icon = navbar_icon_right.png  
-  	action = webview.action_english
-  	action = webview.action_german
+  	action = webview.show_english_talks
+  	action = webview.show_german_talks
   }
 	 
 }     
@@ -27,8 +27,8 @@ contentprovider DukeConWebsite
 webview DKCWebview {
     backButton.handler = previousPage
     
-    action action_english;
-    action action_german;
+    action show_english_talks;
+    action show_german_talks;
     
 }
   
