@@ -1,24 +1,35 @@
 
 app ConApp {
 	
-  appicon="AppIcon.png"
-  splash="SplashScreen.png"
+  appicon = AppIcon.png
+  splash = SplashScreen.png
+  title = ConfApp
   
-  mainview=DKCWebview( DukeConWebsite() )            
+  mainview=DKCWebview( DukeConWebsite() )
+  
+  navigationBar.left = {
+  	icon = navbar_icon_left.png  
+  	action = webview.backButton
+  }
+  
+  navigationBar.right = {
+  	icon = navbar_icon_right.png  
+  	action = webview.action_english
+  	action = webview.action_german
+  }
 	 
 }     
 
 contentprovider DukeConWebsite 
-    fetches HTML from "http://dukecon.org" 
- 
-       
+    fetches HTML from http://dukecon.org 
+
    
 webview DKCWebview {
-    title="ConfApp" 
-    button{
-  		icon="icon_back.png"  
-  		handler="previousPage"  
-  	} 
+    backButton.handler = previousPage
+    
+    action action_english;
+    action action_german;
+    
 }
   
   
