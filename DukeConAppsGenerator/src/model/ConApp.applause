@@ -9,7 +9,7 @@ app ConApp {
   
   navigationBar.left = {
   	icon = navbar_icon_left.png  
-  	action = webview.backButton
+  	action = webview.previous_page
   }
   
   navigationBar.right = {
@@ -25,10 +25,10 @@ contentprovider DukeConWebsite
 
    
 webview DKCWebview {
-    backButton.handler = previousPage
     
     action show_english_talks, 
-           show_german_talks
+           show_german_talks,
+           previous_page
     
 }
   
