@@ -9,13 +9,13 @@ app ConApp {
   
   navigationBar.left = {
   	icon = navbar_icon_left.png  
-  	triggers = webview.previous_page
+  	triggers = DKCWebview.previous_page
   }
   
   navigationBar.right = {
   	icon = navbar_icon_right.png  
-  	triggers = webview.show_english_talks,
-  	           webview.show_german_talks
+  	triggers = DKCWebview.show_english_talks,
+  	           DKCWebview.show_german_talks
   }
 	 
 }     
