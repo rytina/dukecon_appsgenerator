@@ -8,8 +8,10 @@ import java.util.Collections;
 import org.apache.commons.io.FileUtils;
 import org.applause.lang.applauseDsl.ApplauseModel;
 import org.applause.lang.applauseDsl.Application;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.FileHandle;
@@ -46,6 +48,7 @@ public class DukeConAppsGenerator {
 		File jarFile = new File("bin/DukeConAppsGenerator.jar");
 		Resource resource = resourceSet.getResource(
 				URI.createURI("archive:file://"+ jarFile.getAbsolutePath() +"!/model/ConApp.applause"), true);
+		validateResource(resource);
 		ApplauseModel model = (ApplauseModel) resource.getContents().get(0);
 
 		OutputImpl output = new OutputImpl();
@@ -53,6 +56,17 @@ public class DukeConAppsGenerator {
 		output.addOutlet(outlet);
 
 		generate(model.getApplication(), output);
+	}
+
+	private static void validateResource(Resource resource) {
+		if(!resource.getErrors().isEmpty()){
+			EList<Diagnostic> errors = resource.getErrors();
+			String errorMsg = "";
+			for (Diagnostic diagnostic : errors) {
+				errorMsg += "line " +diagnostic.getLine() + ": " +diagnostic.getMessage() + "\n";
+			}
+			throw new RuntimeException("resource has errors! \n" + errorMsg);	
+		}
 	}
 
 	private static void copyResourceTo(File appsFolder) throws IOException, URISyntaxException {
