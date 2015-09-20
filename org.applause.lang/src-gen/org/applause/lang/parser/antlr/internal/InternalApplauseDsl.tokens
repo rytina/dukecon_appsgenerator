@@ -18,10 +18,10 @@ RULE_ML_COMMENT=7
 'Value2'=73
 'extends'=40
 'section'=60
+'image='=59
 'handler='=33
 '{'=24
 'urlconform('=18
-'image='=59
 'as'=69
 'appicon='=25
 'entity'=39
