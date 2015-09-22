@@ -38,7 +38,5 @@ public class ApplauseDslStandaloneSetupGenerated implements ISetup {
 		
 
 
-
-
 	}
 }
