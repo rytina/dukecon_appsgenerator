@@ -109,6 +109,14 @@ public class ApplauseDslSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ApplauseDslPackage.NAVIGATION_BAR_ITEM:
+      {
+        NavigationBarItem navigationBarItem = (NavigationBarItem)theEObject;
+        T result = caseNavigationBarItem(navigationBarItem);
+        if (result == null) result = caseModelElement(navigationBarItem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ApplauseDslPackage.VARIABLE_DECLARATION:
       {
         VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
@@ -451,22 +459,6 @@ public class ApplauseDslSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ApplauseDslPackage.COMPLEX_PROVIDER_CONSTRUCTION:
-      {
-        ComplexProviderConstruction complexProviderConstruction = (ComplexProviderConstruction)theEObject;
-        T result = caseComplexProviderConstruction(complexProviderConstruction);
-        if (result == null) result = caseProviderConstruction(complexProviderConstruction);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ApplauseDslPackage.SIMPLE_PROVIDER_CONSTRUCTION:
-      {
-        SimpleProviderConstruction simpleProviderConstruction = (SimpleProviderConstruction)theEObject;
-        T result = caseSimpleProviderConstruction(simpleProviderConstruction);
-        if (result == null) result = caseProviderConstruction(simpleProviderConstruction);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       default: return defaultCase(theEObject);
     }
   }
@@ -499,6 +491,22 @@ public class ApplauseDslSwitch<T>
    * @generated
    */
   public T caseModelElement(ModelElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Navigation Bar Item</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Navigation Bar Item</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNavigationBarItem(NavigationBarItem object)
   {
     return null;
   }
@@ -1155,38 +1163,6 @@ public class ApplauseDslSwitch<T>
    * @generated
    */
   public T caseConstant(Constant object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Complex Provider Construction</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Complex Provider Construction</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseComplexProviderConstruction(ComplexProviderConstruction object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Simple Provider Construction</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Simple Provider Construction</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSimpleProviderConstruction(SimpleProviderConstruction object)
   {
     return null;
   }

@@ -8,8 +8,15 @@ ApplauseModel:
 	
 
 ModelElement:
-	Type | ContentProvider | View | Constant;
+	Type | ContentProvider | View | Constant | NavigationBarItem;
 	
+NavigationBarItem:		
+'navigationBar.' position=Position '='  '{'
+ (('icon' '=' icon=ScalarExpression)?
+ 	& ('triggers' '=' triggers+=ScalarExpression (',' triggers+=ScalarExpression)*)?
+  )
+'}'
+;
 // -------------------------------------------
 // General
 
@@ -71,23 +78,24 @@ CollectionFunction:
 
 Application returns Application:
 	(tabbarApplication?="tabbarApp" | "app") name=ID '{'
-		"appicon=" appicon=ScalarExpression
-		"splash=" splash=ScalarExpression
-		'mainview=' mainview=ViewCall
+		"appicon" '=' appicon=ScalarExpression
+		"splash" '=' splash=ScalarExpression
+		'mainview' '=' mainview=ViewCall
 		(buttons += Button)*
 	'}';
 
 Button:
 	'button' '{'
-		('title=' title=ScalarExpression)?
-		& ('icon=' icon=ScalarExpression)?
-		& ('view=' view=ViewCall | 'handler=' handler=STRING)
+		('title' '=' title=ScalarExpression)?
+		& ('icon' '=' icon=ScalarExpression)?
+		& ('view' '=' view=ViewCall | 'handler' '=' handler=STRING)
 	'}'
 ;
 
 Constant returns VariableDeclaration:
 	{Constant} 'const' name=ID language+=("de="|"en=")? value+=ScalarExpression 
 								(',' language+=("de="|"en=")? value+=ScalarExpression)*;	
+
 
 // -------------------------------------------
 // types
@@ -117,9 +125,8 @@ ContentProvider:
 	('selects' selection=ScalarExpression)?;
 
 ProviderConstruction:
-	{ComplexProviderConstruction} provider=[ContentProvider] '(' (argument=Expression|predefinedParameter=PredefinedParameter)? ')' |
-	{SimpleProviderConstruction} expression=Expression;
-
+	provider=[ContentProvider] '(' (argument=Expression|predefinedParameter=PredefinedParameter)? ')'
+;
 // -------------------------------------------
 // views
 
@@ -133,68 +140,77 @@ SectionedView:
 		
 TableView:
 	'tableview' name=ID ('(' content=Parameter ')')? (':' superView=[SectionedView])? '{'
-		('title=' title=ScalarExpression)?
+		('title' '=' title=ScalarExpression)?
 		(buttons += Button)*
 		(forAllSections=ViewForAllSections)?
 		(sections+=ViewSection)*
+		('action' '=' actions+=Action (',' actions+=Action)*)?
 	'}';
 	
 DetailsView:
 	'detailsview' name=ID ('(' content=Parameter ')')? (':' superView=[SectionedView])? '{'
-		'title=' title=ScalarExpression
+		'title' '=' title=ScalarExpression
 		(buttons += Button)*
 		(header=ViewHeader)?
 		(forAllSections=ViewForAllSections)?
 		(sections+=ViewSection)*
+		('action' '=' actions+=Action (',' actions+=Action)*)?
 	'}';
 	
 WebView:
 	'webview' name=ID '{'
-		'title=' title=ScalarExpression
+		'title' '=' title=ScalarExpression
 		(buttons += Button)*
 		(header=ViewHeader)?
 		(forAllSections=ViewForAllSections)?
 		(sections+=ViewSection)*
+		('action' '=' actions+=Action (',' actions+=Action)*)?
 	'}';
 		
 	
 CustomView:
 	'customview' name=ID ('(' content=Parameter ')')? 'implementedBy' objclass=STRING
-	'title=' title=ScalarExpression
-	(buttons += Button)*;
+	'title' '=' title=ScalarExpression
+	(buttons += Button)*
+	('action' '=' actions+=Action (',' actions+=Action)*)?
+	;
+	
+Action returns VariableDeclaration:
+	name=ID
+;	
 	
 ViewHeader:
 	{ViewHeader}
 	'header' '{'
-		('title=' title=ScalarExpression)?
-		('subtitle=' subtitle=ScalarExpression)?
-		('details=' details=ScalarExpression)?
-		('image=' image=ScalarExpression)?
+		('title' '=' title=ScalarExpression)?
+		('subtitle' '=' subtitle=ScalarExpression)?
+		('details' '=' details=ScalarExpression)?
+		('image' '=' image=ScalarExpression)?
 	'}';
 	
 ViewSection:
 {ViewSection}
 	'section' '{'
-		('title=' title=ScalarExpression)?
+		('title' '=' title=ScalarExpression)?
 		(cells+=SectionCell)*
 	'}';
 	
 ViewForAllSections:
 {ViewForAllSections}
 	'forAllSections' '{'
-		('title=' title=ScalarExpression)?
-		('content=' provider=ProviderConstruction)?
+		('title' '=' title=ScalarExpression)?
+		('content' '=' provider=ProviderConstruction)?
 		(cells+=SectionCell)*
 	'}';	
 	
 SectionCell:
 	'cell' type=CellType ('foreach' iterator=CollectionIterator)? '{'
-		('text=' text=ScalarExpression)?
-		('details=' details=ScalarExpression)?
-		('image=' image=ScalarExpression)?
-		('query=' query=ScalarExpression)?
-		('action=' action=ViewAction)?
-		('button=' buttonAction=ViewAction)?
+		('text' '=' text=ScalarExpression)?
+		('details' '=' details=ScalarExpression)?
+		('image' '=' image=ScalarExpression)?
+		('query' '=' query=ScalarExpression)?
+		('action' '=' action=ViewAction)?
+		('button' '=' buttonAction=ViewAction)?
 	'}';	
 	
 enum CellType:
@@ -205,6 +221,10 @@ enum CellType:
 	subtitle = 'Subtitle' |
 	maps = 'Map';
 	
+enum Position:
+	default = 'left' | center = 'center' | right = 'right'
+;
+
 CollectionIterator:
 	collection=CollectionExpression 'as' name=ID;
 	
@@ -219,4 +239,4 @@ ExternalOpen:
 	url=ScalarExpression;
 
 ViewCall:
-	view=[View] '(' (provider=ProviderConstruction)? ')';	
+	view=[View] '(' (provider=ProviderConstruction) ')'?  action=NestedObjectReference?;	

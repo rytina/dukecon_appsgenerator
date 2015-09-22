@@ -16,7 +16,6 @@ import org.applause.lang.applauseDsl.CollectionExpression;
 import org.applause.lang.applauseDsl.CollectionFunction;
 import org.applause.lang.applauseDsl.CollectionIterator;
 import org.applause.lang.applauseDsl.CollectionLiteral;
-import org.applause.lang.applauseDsl.ComplexProviderConstruction;
 import org.applause.lang.applauseDsl.Constant;
 import org.applause.lang.applauseDsl.ContentProvider;
 import org.applause.lang.applauseDsl.CustomView;
@@ -25,8 +24,10 @@ import org.applause.lang.applauseDsl.Entity;
 import org.applause.lang.applauseDsl.Expression;
 import org.applause.lang.applauseDsl.ExternalOpen;
 import org.applause.lang.applauseDsl.ModelElement;
+import org.applause.lang.applauseDsl.NavigationBarItem;
 import org.applause.lang.applauseDsl.ObjectReference;
 import org.applause.lang.applauseDsl.Parameter;
+import org.applause.lang.applauseDsl.Position;
 import org.applause.lang.applauseDsl.PredefinedParameter;
 import org.applause.lang.applauseDsl.Property;
 import org.applause.lang.applauseDsl.ProviderConstruction;
@@ -34,7 +35,6 @@ import org.applause.lang.applauseDsl.ScalarExpression;
 import org.applause.lang.applauseDsl.SectionCell;
 import org.applause.lang.applauseDsl.SectionId;
 import org.applause.lang.applauseDsl.SectionedView;
-import org.applause.lang.applauseDsl.SimpleProviderConstruction;
 import org.applause.lang.applauseDsl.SimpleType;
 import org.applause.lang.applauseDsl.StringConcat;
 import org.applause.lang.applauseDsl.StringFunction;
@@ -83,6 +83,13 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * @generated
    */
   private EClass modelElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass navigationBarItemEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -376,21 +383,14 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass complexProviderConstructionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass simpleProviderConstructionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EEnum cellTypeEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum positionEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -500,9 +500,39 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModelElement_Name()
+  public EClass getNavigationBarItem()
   {
-    return (EAttribute)modelElementEClass.getEStructuralFeatures().get(0);
+    return navigationBarItemEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNavigationBarItem_Position()
+  {
+    return (EAttribute)navigationBarItemEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNavigationBarItem_Icon()
+  {
+    return (EReference)navigationBarItemEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNavigationBarItem_Triggers()
+  {
+    return (EReference)navigationBarItemEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -513,6 +543,16 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
   public EClass getVariableDeclaration()
   {
     return variableDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getVariableDeclaration_Name()
+  {
+    return (EAttribute)variableDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -840,6 +880,16 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getType_Name()
+  {
+    return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getSimpleType()
   {
     return simpleTypeEClass;
@@ -930,9 +980,19 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getContentProvider_Name()
+  {
+    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getContentProvider_Parameter()
   {
-    return (EReference)contentProviderEClass.getEStructuralFeatures().get(0);
+    return (EReference)contentProviderEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -942,7 +1002,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    */
   public EAttribute getContentProvider_Resolver()
   {
-    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -952,7 +1012,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    */
   public EReference getContentProvider_Type()
   {
-    return (EReference)contentProviderEClass.getEStructuralFeatures().get(2);
+    return (EReference)contentProviderEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -962,7 +1022,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    */
   public EAttribute getContentProvider_Many()
   {
-    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -972,7 +1032,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    */
   public EAttribute getContentProvider_Xml()
   {
-    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(4);
+    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -982,7 +1042,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    */
   public EAttribute getContentProvider_Html()
   {
-    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(5);
+    return (EAttribute)contentProviderEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -992,7 +1052,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    */
   public EReference getContentProvider_Url()
   {
-    return (EReference)contentProviderEClass.getEStructuralFeatures().get(6);
+    return (EReference)contentProviderEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -1002,7 +1062,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    */
   public EReference getContentProvider_Selection()
   {
-    return (EReference)contentProviderEClass.getEStructuralFeatures().get(7);
+    return (EReference)contentProviderEClass.getEStructuralFeatures().get(8);
   }
 
   /**
@@ -1020,6 +1080,36 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getProviderConstruction_Provider()
+  {
+    return (EReference)providerConstructionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProviderConstruction_Argument()
+  {
+    return (EReference)providerConstructionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProviderConstruction_PredefinedParameter()
+  {
+    return (EReference)providerConstructionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getView()
   {
     return viewEClass;
@@ -1030,9 +1120,19 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getView_Name()
+  {
+    return (EAttribute)viewEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getView_Title()
   {
-    return (EReference)viewEClass.getEStructuralFeatures().get(0);
+    return (EReference)viewEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1042,7 +1142,17 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    */
   public EReference getView_Buttons()
   {
-    return (EReference)viewEClass.getEStructuralFeatures().get(1);
+    return (EReference)viewEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getView_Actions()
+  {
+    return (EReference)viewEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1500,6 +1610,16 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getViewCall_Action()
+  {
+    return (EReference)viewCallEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getStringConcat()
   {
     return stringConcatEClass;
@@ -1640,69 +1760,19 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getComplexProviderConstruction()
-  {
-    return complexProviderConstructionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getComplexProviderConstruction_Provider()
-  {
-    return (EReference)complexProviderConstructionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getComplexProviderConstruction_Argument()
-  {
-    return (EReference)complexProviderConstructionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getComplexProviderConstruction_PredefinedParameter()
-  {
-    return (EReference)complexProviderConstructionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getSimpleProviderConstruction()
-  {
-    return simpleProviderConstructionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSimpleProviderConstruction_Expression()
-  {
-    return (EReference)simpleProviderConstructionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EEnum getCellType()
   {
     return cellTypeEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getPosition()
+  {
+    return positionEEnum;
   }
 
   /**
@@ -1740,9 +1810,14 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     createEReference(applauseModelEClass, APPLAUSE_MODEL__ELEMENTS);
 
     modelElementEClass = createEClass(MODEL_ELEMENT);
-    createEAttribute(modelElementEClass, MODEL_ELEMENT__NAME);
+
+    navigationBarItemEClass = createEClass(NAVIGATION_BAR_ITEM);
+    createEAttribute(navigationBarItemEClass, NAVIGATION_BAR_ITEM__POSITION);
+    createEReference(navigationBarItemEClass, NAVIGATION_BAR_ITEM__ICON);
+    createEReference(navigationBarItemEClass, NAVIGATION_BAR_ITEM__TRIGGERS);
 
     variableDeclarationEClass = createEClass(VARIABLE_DECLARATION);
+    createEAttribute(variableDeclarationEClass, VARIABLE_DECLARATION__NAME);
 
     typeDescriptionEClass = createEClass(TYPE_DESCRIPTION);
     createEReference(typeDescriptionEClass, TYPE_DESCRIPTION__TYPE);
@@ -1790,6 +1865,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     createEAttribute(buttonEClass, BUTTON__HANDLER);
 
     typeEClass = createEClass(TYPE);
+    createEAttribute(typeEClass, TYPE__NAME);
 
     simpleTypeEClass = createEClass(SIMPLE_TYPE);
     createEAttribute(simpleTypeEClass, SIMPLE_TYPE__PLATFORM_TYPE);
@@ -1803,6 +1879,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     createEReference(propertyEClass, PROPERTY__DESCRIPTION);
 
     contentProviderEClass = createEClass(CONTENT_PROVIDER);
+    createEAttribute(contentProviderEClass, CONTENT_PROVIDER__NAME);
     createEReference(contentProviderEClass, CONTENT_PROVIDER__PARAMETER);
     createEAttribute(contentProviderEClass, CONTENT_PROVIDER__RESOLVER);
     createEReference(contentProviderEClass, CONTENT_PROVIDER__TYPE);
@@ -1813,10 +1890,15 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     createEReference(contentProviderEClass, CONTENT_PROVIDER__SELECTION);
 
     providerConstructionEClass = createEClass(PROVIDER_CONSTRUCTION);
+    createEReference(providerConstructionEClass, PROVIDER_CONSTRUCTION__PROVIDER);
+    createEReference(providerConstructionEClass, PROVIDER_CONSTRUCTION__ARGUMENT);
+    createEReference(providerConstructionEClass, PROVIDER_CONSTRUCTION__PREDEFINED_PARAMETER);
 
     viewEClass = createEClass(VIEW);
+    createEAttribute(viewEClass, VIEW__NAME);
     createEReference(viewEClass, VIEW__TITLE);
     createEReference(viewEClass, VIEW__BUTTONS);
+    createEReference(viewEClass, VIEW__ACTIONS);
 
     sectionedViewEClass = createEClass(SECTIONED_VIEW);
     createEReference(sectionedViewEClass, SECTIONED_VIEW__CONTENT);
@@ -1876,6 +1958,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     viewCallEClass = createEClass(VIEW_CALL);
     createEReference(viewCallEClass, VIEW_CALL__VIEW);
     createEReference(viewCallEClass, VIEW_CALL__PROVIDER);
+    createEReference(viewCallEClass, VIEW_CALL__ACTION);
 
     stringConcatEClass = createEClass(STRING_CONCAT);
     createEReference(stringConcatEClass, STRING_CONCAT__VALUES);
@@ -1896,16 +1979,9 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     createEAttribute(constantEClass, CONSTANT__LANGUAGE);
     createEReference(constantEClass, CONSTANT__VALUE);
 
-    complexProviderConstructionEClass = createEClass(COMPLEX_PROVIDER_CONSTRUCTION);
-    createEReference(complexProviderConstructionEClass, COMPLEX_PROVIDER_CONSTRUCTION__PROVIDER);
-    createEReference(complexProviderConstructionEClass, COMPLEX_PROVIDER_CONSTRUCTION__ARGUMENT);
-    createEReference(complexProviderConstructionEClass, COMPLEX_PROVIDER_CONSTRUCTION__PREDEFINED_PARAMETER);
-
-    simpleProviderConstructionEClass = createEClass(SIMPLE_PROVIDER_CONSTRUCTION);
-    createEReference(simpleProviderConstructionEClass, SIMPLE_PROVIDER_CONSTRUCTION__EXPRESSION);
-
     // Create enums
     cellTypeEEnum = createEEnum(CELL_TYPE);
+    positionEEnum = createEEnum(POSITION);
   }
 
   /**
@@ -1937,6 +2013,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    navigationBarItemEClass.getESuperTypes().add(this.getModelElement());
     variableDeclarationEClass.getESuperTypes().add(this.getModelElement());
     parameterEClass.getESuperTypes().add(this.getVariableDeclaration());
     objectReferenceEClass.getESuperTypes().add(this.getExpression());
@@ -1971,8 +2048,6 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     stringUrlConformEClass.getESuperTypes().add(this.getStringFunction());
     stringSplitEClass.getESuperTypes().add(this.getCollectionFunction());
     constantEClass.getESuperTypes().add(this.getVariableDeclaration());
-    complexProviderConstructionEClass.getESuperTypes().add(this.getProviderConstruction());
-    simpleProviderConstructionEClass.getESuperTypes().add(this.getProviderConstruction());
 
     // Initialize classes and features; add operations and parameters
     initEClass(applauseModelEClass, ApplauseModel.class, "ApplauseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1980,9 +2055,14 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     initEReference(getApplauseModel_Elements(), this.getModelElement(), null, "elements", null, 0, -1, ApplauseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(modelElementEClass, ModelElement.class, "ModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModelElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(navigationBarItemEClass, NavigationBarItem.class, "NavigationBarItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNavigationBarItem_Position(), this.getPosition(), "position", null, 0, 1, NavigationBarItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNavigationBarItem_Icon(), this.getScalarExpression(), null, "icon", null, 0, 1, NavigationBarItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNavigationBarItem_Triggers(), this.getScalarExpression(), null, "triggers", null, 0, -1, NavigationBarItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(variableDeclarationEClass, VariableDeclaration.class, "VariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVariableDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeDescriptionEClass, TypeDescription.class, "TypeDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTypeDescription_Type(), this.getType(), null, "type", null, 0, 1, TypeDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2030,6 +2110,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     initEAttribute(getButton_Handler(), ecorePackage.getEString(), "handler", null, 0, 1, Button.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getType_Name(), ecorePackage.getEString(), "name", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleTypeEClass, SimpleType.class, "SimpleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleType_PlatformType(), ecorePackage.getEString(), "platformType", null, 0, 1, SimpleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2043,6 +2124,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     initEReference(getProperty_Description(), this.getTypeDescription(), null, "description", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(contentProviderEClass, ContentProvider.class, "ContentProvider", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getContentProvider_Name(), ecorePackage.getEString(), "name", null, 0, 1, ContentProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getContentProvider_Parameter(), this.getParameter(), null, "parameter", null, 0, 1, ContentProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getContentProvider_Resolver(), ecorePackage.getEBoolean(), "resolver", null, 0, 1, ContentProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getContentProvider_Type(), this.getType(), null, "type", null, 0, 1, ContentProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2053,10 +2135,15 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     initEReference(getContentProvider_Selection(), this.getScalarExpression(), null, "selection", null, 0, 1, ContentProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(providerConstructionEClass, ProviderConstruction.class, "ProviderConstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getProviderConstruction_Provider(), this.getContentProvider(), null, "provider", null, 0, 1, ProviderConstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProviderConstruction_Argument(), this.getExpression(), null, "argument", null, 0, 1, ProviderConstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProviderConstruction_PredefinedParameter(), this.getPredefinedParameter(), null, "predefinedParameter", null, 0, 1, ProviderConstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(viewEClass, View.class, "View", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getView_Name(), ecorePackage.getEString(), "name", null, 0, 1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getView_Title(), this.getScalarExpression(), null, "title", null, 0, 1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getView_Buttons(), this.getButton(), null, "buttons", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getView_Actions(), this.getVariableDeclaration(), null, "actions", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(sectionedViewEClass, SectionedView.class, "SectionedView", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSectionedView_Content(), this.getParameter(), null, "content", null, 0, 1, SectionedView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2116,6 +2203,7 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     initEClass(viewCallEClass, ViewCall.class, "ViewCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getViewCall_View(), this.getView(), null, "view", null, 0, 1, ViewCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getViewCall_Provider(), this.getProviderConstruction(), null, "provider", null, 0, 1, ViewCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getViewCall_Action(), this.getObjectReference(), null, "action", null, 0, 1, ViewCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stringConcatEClass, StringConcat.class, "StringConcat", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStringConcat_Values(), this.getScalarExpression(), null, "values", null, 0, -1, StringConcat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2136,14 +2224,6 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     initEAttribute(getConstant_Language(), ecorePackage.getEString(), "language", null, 0, -1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getConstant_Value(), this.getScalarExpression(), null, "value", null, 0, -1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(complexProviderConstructionEClass, ComplexProviderConstruction.class, "ComplexProviderConstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getComplexProviderConstruction_Provider(), this.getContentProvider(), null, "provider", null, 0, 1, ComplexProviderConstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getComplexProviderConstruction_Argument(), this.getExpression(), null, "argument", null, 0, 1, ComplexProviderConstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getComplexProviderConstruction_PredefinedParameter(), this.getPredefinedParameter(), null, "predefinedParameter", null, 0, 1, ComplexProviderConstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(simpleProviderConstructionEClass, SimpleProviderConstruction.class, "SimpleProviderConstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSimpleProviderConstruction_Expression(), this.getExpression(), null, "expression", null, 0, 1, SimpleProviderConstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     // Initialize enums and add enum literals
     initEEnum(cellTypeEEnum, CellType.class, "CellType");
     addEEnumLiteral(cellTypeEEnum, CellType.DEFAULT);
@@ -2152,6 +2232,11 @@ public class ApplauseDslPackageImpl extends EPackageImpl implements ApplauseDslP
     addEEnumLiteral(cellTypeEEnum, CellType.DOUBLE);
     addEEnumLiteral(cellTypeEEnum, CellType.SUBTITLE);
     addEEnumLiteral(cellTypeEEnum, CellType.MAPS);
+
+    initEEnum(positionEEnum, Position.class, "Position");
+    addEEnumLiteral(positionEEnum, Position.DEFAULT);
+    addEEnumLiteral(positionEEnum, Position.CENTER);
+    addEEnumLiteral(positionEEnum, Position.RIGHT);
 
     // Create resource
     createResource(eNS_URI);

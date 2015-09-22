@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.applause.lang.applauseDsl.impl.ContentProviderImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.applause.lang.applauseDsl.impl.ContentProviderImpl#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.applause.lang.applauseDsl.impl.ContentProviderImpl#isResolver <em>Resolver</em>}</li>
  *   <li>{@link org.applause.lang.applauseDsl.impl.ContentProviderImpl#getType <em>Type</em>}</li>
@@ -41,6 +42,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class ContentProviderImpl extends ModelElementImpl implements ContentProvider
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -180,6 +201,29 @@ public class ContentProviderImpl extends ModelElementImpl implements ContentProv
   protected EClass eStaticClass()
   {
     return ApplauseDslPackage.Literals.CONTENT_PROVIDER;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ApplauseDslPackage.CONTENT_PROVIDER__NAME, oldName, name));
   }
 
   /**
@@ -491,6 +535,8 @@ public class ContentProviderImpl extends ModelElementImpl implements ContentProv
   {
     switch (featureID)
     {
+      case ApplauseDslPackage.CONTENT_PROVIDER__NAME:
+        return getName();
       case ApplauseDslPackage.CONTENT_PROVIDER__PARAMETER:
         return getParameter();
       case ApplauseDslPackage.CONTENT_PROVIDER__RESOLVER:
@@ -522,6 +568,9 @@ public class ContentProviderImpl extends ModelElementImpl implements ContentProv
   {
     switch (featureID)
     {
+      case ApplauseDslPackage.CONTENT_PROVIDER__NAME:
+        setName((String)newValue);
+        return;
       case ApplauseDslPackage.CONTENT_PROVIDER__PARAMETER:
         setParameter((Parameter)newValue);
         return;
@@ -560,6 +609,9 @@ public class ContentProviderImpl extends ModelElementImpl implements ContentProv
   {
     switch (featureID)
     {
+      case ApplauseDslPackage.CONTENT_PROVIDER__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case ApplauseDslPackage.CONTENT_PROVIDER__PARAMETER:
         setParameter((Parameter)null);
         return;
@@ -598,6 +650,8 @@ public class ContentProviderImpl extends ModelElementImpl implements ContentProv
   {
     switch (featureID)
     {
+      case ApplauseDslPackage.CONTENT_PROVIDER__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case ApplauseDslPackage.CONTENT_PROVIDER__PARAMETER:
         return parameter != null;
       case ApplauseDslPackage.CONTENT_PROVIDER__RESOLVER:
@@ -629,7 +683,9 @@ public class ContentProviderImpl extends ModelElementImpl implements ContentProv
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (resolver: ");
+    result.append(" (name: ");
+    result.append(name);
+    result.append(", resolver: ");
     result.append(resolver);
     result.append(", many: ");
     result.append(many);

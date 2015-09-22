@@ -16,6 +16,7 @@ package org.applause.lang.applauseDsl;
  * <ul>
  *   <li>{@link org.applause.lang.applauseDsl.ViewCall#getView <em>View</em>}</li>
  *   <li>{@link org.applause.lang.applauseDsl.ViewCall#getProvider <em>Provider</em>}</li>
+ *   <li>{@link org.applause.lang.applauseDsl.ViewCall#getAction <em>Action</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +77,31 @@ public interface ViewCall extends ViewAction
    * @generated
    */
   void setProvider(ProviderConstruction value);
+
+  /**
+   * Returns the value of the '<em><b>Action</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Action</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Action</em>' containment reference.
+   * @see #setAction(ObjectReference)
+   * @see org.applause.lang.applauseDsl.ApplauseDslPackage#getViewCall_Action()
+   * @model containment="true"
+   * @generated
+   */
+  ObjectReference getAction();
+
+  /**
+   * Sets the value of the '{@link org.applause.lang.applauseDsl.ViewCall#getAction <em>Action</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Action</em>' containment reference.
+   * @see #getAction()
+   * @generated
+   */
+  void setAction(ObjectReference value);
 
 } // ViewCall

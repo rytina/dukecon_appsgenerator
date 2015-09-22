@@ -70,6 +70,7 @@ public class ApplauseDslFactoryImpl extends EFactoryImpl implements ApplauseDslF
     {
       case ApplauseDslPackage.APPLAUSE_MODEL: return createApplauseModel();
       case ApplauseDslPackage.MODEL_ELEMENT: return createModelElement();
+      case ApplauseDslPackage.NAVIGATION_BAR_ITEM: return createNavigationBarItem();
       case ApplauseDslPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case ApplauseDslPackage.TYPE_DESCRIPTION: return createTypeDescription();
       case ApplauseDslPackage.PARAMETER: return createParameter();
@@ -111,8 +112,6 @@ public class ApplauseDslFactoryImpl extends EFactoryImpl implements ApplauseDslF
       case ApplauseDslPackage.STRING_URL_CONFORM: return createStringUrlConform();
       case ApplauseDslPackage.STRING_SPLIT: return createStringSplit();
       case ApplauseDslPackage.CONSTANT: return createConstant();
-      case ApplauseDslPackage.COMPLEX_PROVIDER_CONSTRUCTION: return createComplexProviderConstruction();
-      case ApplauseDslPackage.SIMPLE_PROVIDER_CONSTRUCTION: return createSimpleProviderConstruction();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -130,6 +129,8 @@ public class ApplauseDslFactoryImpl extends EFactoryImpl implements ApplauseDslF
     {
       case ApplauseDslPackage.CELL_TYPE:
         return createCellTypeFromString(eDataType, initialValue);
+      case ApplauseDslPackage.POSITION:
+        return createPositionFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -147,6 +148,8 @@ public class ApplauseDslFactoryImpl extends EFactoryImpl implements ApplauseDslF
     {
       case ApplauseDslPackage.CELL_TYPE:
         return convertCellTypeToString(eDataType, instanceValue);
+      case ApplauseDslPackage.POSITION:
+        return convertPositionToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -172,6 +175,17 @@ public class ApplauseDslFactoryImpl extends EFactoryImpl implements ApplauseDslF
   {
     ModelElementImpl modelElement = new ModelElementImpl();
     return modelElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NavigationBarItem createNavigationBarItem()
+  {
+    NavigationBarItemImpl navigationBarItem = new NavigationBarItemImpl();
+    return navigationBarItem;
   }
 
   /**
@@ -630,28 +644,6 @@ public class ApplauseDslFactoryImpl extends EFactoryImpl implements ApplauseDslF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ComplexProviderConstruction createComplexProviderConstruction()
-  {
-    ComplexProviderConstructionImpl complexProviderConstruction = new ComplexProviderConstructionImpl();
-    return complexProviderConstruction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SimpleProviderConstruction createSimpleProviderConstruction()
-  {
-    SimpleProviderConstructionImpl simpleProviderConstruction = new SimpleProviderConstructionImpl();
-    return simpleProviderConstruction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public CellType createCellTypeFromString(EDataType eDataType, String initialValue)
   {
     CellType result = CellType.get(initialValue);
@@ -665,6 +657,28 @@ public class ApplauseDslFactoryImpl extends EFactoryImpl implements ApplauseDslF
    * @generated
    */
   public String convertCellTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Position createPositionFromString(EDataType eDataType, String initialValue)
+  {
+    Position result = Position.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertPositionToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

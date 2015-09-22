@@ -44,6 +44,15 @@ public interface ApplauseDslFactory extends EFactory
   ModelElement createModelElement();
 
   /**
+   * Returns a new object of class '<em>Navigation Bar Item</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Navigation Bar Item</em>'.
+   * @generated
+   */
+  NavigationBarItem createNavigationBarItem();
+
+  /**
    * Returns a new object of class '<em>Variable Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -411,24 +420,6 @@ public interface ApplauseDslFactory extends EFactory
    * @generated
    */
   Constant createConstant();
-
-  /**
-   * Returns a new object of class '<em>Complex Provider Construction</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Complex Provider Construction</em>'.
-   * @generated
-   */
-  ComplexProviderConstruction createComplexProviderConstruction();
-
-  /**
-   * Returns a new object of class '<em>Simple Provider Construction</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Simple Provider Construction</em>'.
-   * @generated
-   */
-  SimpleProviderConstruction createSimpleProviderConstruction();
 
   /**
    * Returns the package supported by this factory.

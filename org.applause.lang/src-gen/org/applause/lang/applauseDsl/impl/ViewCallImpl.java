@@ -6,6 +6,7 @@
 package org.applause.lang.applauseDsl.impl;
 
 import org.applause.lang.applauseDsl.ApplauseDslPackage;
+import org.applause.lang.applauseDsl.ObjectReference;
 import org.applause.lang.applauseDsl.ProviderConstruction;
 import org.applause.lang.applauseDsl.View;
 import org.applause.lang.applauseDsl.ViewCall;
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link org.applause.lang.applauseDsl.impl.ViewCallImpl#getView <em>View</em>}</li>
  *   <li>{@link org.applause.lang.applauseDsl.impl.ViewCallImpl#getProvider <em>Provider</em>}</li>
+ *   <li>{@link org.applause.lang.applauseDsl.impl.ViewCallImpl#getAction <em>Action</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +55,16 @@ public class ViewCallImpl extends ViewActionImpl implements ViewCall
    * @ordered
    */
   protected ProviderConstruction provider;
+
+  /**
+   * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAction()
+   * @generated
+   * @ordered
+   */
+  protected ObjectReference action;
 
   /**
    * <!-- begin-user-doc -->
@@ -171,6 +183,54 @@ public class ViewCallImpl extends ViewActionImpl implements ViewCall
    * <!-- end-user-doc -->
    * @generated
    */
+  public ObjectReference getAction()
+  {
+    return action;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAction(ObjectReference newAction, NotificationChain msgs)
+  {
+    ObjectReference oldAction = action;
+    action = newAction;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ApplauseDslPackage.VIEW_CALL__ACTION, oldAction, newAction);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setAction(ObjectReference newAction)
+  {
+    if (newAction != action)
+    {
+      NotificationChain msgs = null;
+      if (action != null)
+        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ApplauseDslPackage.VIEW_CALL__ACTION, null, msgs);
+      if (newAction != null)
+        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ApplauseDslPackage.VIEW_CALL__ACTION, null, msgs);
+      msgs = basicSetAction(newAction, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ApplauseDslPackage.VIEW_CALL__ACTION, newAction, newAction));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -178,6 +238,8 @@ public class ViewCallImpl extends ViewActionImpl implements ViewCall
     {
       case ApplauseDslPackage.VIEW_CALL__PROVIDER:
         return basicSetProvider(null, msgs);
+      case ApplauseDslPackage.VIEW_CALL__ACTION:
+        return basicSetAction(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -197,6 +259,8 @@ public class ViewCallImpl extends ViewActionImpl implements ViewCall
         return basicGetView();
       case ApplauseDslPackage.VIEW_CALL__PROVIDER:
         return getProvider();
+      case ApplauseDslPackage.VIEW_CALL__ACTION:
+        return getAction();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -216,6 +280,9 @@ public class ViewCallImpl extends ViewActionImpl implements ViewCall
         return;
       case ApplauseDslPackage.VIEW_CALL__PROVIDER:
         setProvider((ProviderConstruction)newValue);
+        return;
+      case ApplauseDslPackage.VIEW_CALL__ACTION:
+        setAction((ObjectReference)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -237,6 +304,9 @@ public class ViewCallImpl extends ViewActionImpl implements ViewCall
       case ApplauseDslPackage.VIEW_CALL__PROVIDER:
         setProvider((ProviderConstruction)null);
         return;
+      case ApplauseDslPackage.VIEW_CALL__ACTION:
+        setAction((ObjectReference)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -255,6 +325,8 @@ public class ViewCallImpl extends ViewActionImpl implements ViewCall
         return view != null;
       case ApplauseDslPackage.VIEW_CALL__PROVIDER:
         return provider != null;
+      case ApplauseDslPackage.VIEW_CALL__ACTION:
+        return action != null;
     }
     return super.eIsSet(featureID);
   }
