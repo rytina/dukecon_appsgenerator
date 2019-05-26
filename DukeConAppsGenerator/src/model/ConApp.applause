@@ -3,7 +3,7 @@ app ConApp {
 	
   appicon = AppIcon.png
   splash = SplashScreen.png
-  title = ConfApp
+  title = ConfApp2
   
   mainview = DKCWebview( DukeConWebsite() )
   
